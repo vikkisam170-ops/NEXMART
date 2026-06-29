@@ -91,6 +91,10 @@ h1 em{font-style:normal;background:linear-gradient(135deg,var(--cyan),var(--gold
 .b-sale{background:linear-gradient(135deg,var(--cyan),#0080ff);color:#fff}
 .aibtn{position:absolute;top:10px;right:10px;background:rgba(0,200,255,.1);border:1px solid rgba(0,200,255,.25);border-radius:20px;color:var(--cyan);padding:3px 9px;font-size:.63rem;font-weight:700;cursor:pointer;transition:.2s}
 .aibtn:hover{background:rgba(0,200,255,.22)}
+.cswatch{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:11px}
+.ctag{background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--muted);padding:3px 8px;font-size:.66rem;cursor:pointer;transition:.2s;font-weight:500}
+.ctag.on{background:rgba(0,200,255,.14);border-color:var(--cyan);color:var(--cyan)}
+.ctag:hover{border-color:var(--cyan)}
 
 /* WHY */
 .why{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:50px 20px}
@@ -336,32 +340,34 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:44px 20p
 <script>
 // DATA
 const P=[
-  {id:1,cat:'fashion',name:'Premium Wireless Earbuds',e:'🎧',price:24.99,old:49.99,badge:'hot',desc:'Crystal clear sound, 24hr battery, touch controls.'},
-  {id:2,cat:'fashion',name:'Smart Fitness Watch',e:'⌚',price:34.99,old:79.99,badge:'sale',desc:'Heart rate, steps & sleep tracking. Waterproof.'},
-  {id:3,cat:'fashion',name:'LED Polarized Sunglasses',e:'🕶️',price:18.99,old:39.99,badge:'new',desc:'UV400 protection, lightweight, unisex style.'},
-  {id:4,cat:'fashion',name:'Crossbody Travel Bag',e:'👜',price:22.99,old:44.99,badge:null,desc:'Anti-theft, waterproof, multiple pockets.'},
-  {id:5,cat:'home',name:'Digital Air Fryer 5.5L',e:'🍳',price:49.99,old:99.99,badge:'hot',desc:'8 presets, rapid heating, 80% less oil.'},
-  {id:6,cat:'home',name:'Smart LED Bulb 4-Pack',e:'💡',price:19.99,old:39.99,badge:'sale',desc:'16M colors, voice & app control, E27.'},
-  {id:7,cat:'home',name:'Auto Pour Coffee Maker',e:'☕',price:39.99,old:69.99,badge:null,desc:'12-cup, brew timer, keep-warm plate.'},
-  {id:8,cat:'home',name:'Bamboo Cutting Board Set',e:'🔪',price:27.99,old:49.99,badge:'new',desc:'3-piece, juice groove, non-slip, eco-friendly.'},
-  {id:9,cat:'fitness',name:'7-Level Resistance Bands Set',e:'🏋',img:'resistance-bands.jpg',price:16.99,old:32.99,badge:'hot',desc:'7 resistance levels, latex-free silicone, ideal for stretching & home workouts.'}
-  {id:10,cat:'fitness',name:'Extra Thick Yoga Mat',e:'🧘',price:29.99,old:54.99,badge:null,desc:'6mm cushioning, non-slip, carry strap.'},
-  {id:11,cat:'fitness',name:'Speed Jump Rope',e:'🪢',price:12.99,old:24.99,badge:'sale',desc:'Ball bearings, adjustable cable, rep counter.'},
-  {id:12,cat:'fitness',name:'Deep Tissue Foam Roller',e:'🧴',price:21.99,old:39.99,badge:'new',desc:'High-density EVA foam, muscle recovery.'},
-  {id:13,cat:'pets',name:'Auto Pet Feeder 4L',e:'🐾',price:38.99,old:74.99,badge:'hot',desc:'Schedule 4 meals/day, portion control, app.'},
-  {id:14,cat:'pets',name:'LED Safety Pet Collar',e:'🐶',price:14.99,old:27.99,badge:null,desc:'3 flash modes, USB rechargeable, waterproof.'},
-  {id:15,cat:'pets',name:'Pro Pet Grooming Kit',e:'✂️',price:32.99,old:64.99,badge:'sale',desc:'7-piece set, stainless blades, ergonomic.'},
-  {id:16,cat:'pets',name:'Interactive Cat Tunnel',e:'🐱',price:17.99,old:33.99,badge:'new',desc:'3-way tunnel, crinkle sound, washable.'},
-  {id:17,cat:'electronics',name:'Portable Bluetooth Speaker',e:'🔊',price:29.99,old:59.99,badge:'hot',desc:'360° surround, 20hr battery, IPX7.'},
-  {id:18,cat:'electronics',name:'7-in-1 USB-C Hub',e:'🔌',price:27.99,old:54.99,badge:null,desc:'4K HDMI, 100W PD, 3x USB-A, SD reader.'},
-  {id:19,cat:'electronics',name:'Adjustable Laptop Stand',e:'💻',price:22.99,old:42.99,badge:'sale',desc:'6 heights, aluminum, foldable, ventilated.'},
-  {id:20,cat:'electronics',name:'Ring Light Phone Clip',e:'💡',price:15.99,old:29.99,badge:'new',desc:'3 light modes, 10 brightness, 360° rotation.'},
- {id:21,cat:'fashion',name:'Compression Packing Cube Set (5pcs)',e:'🧳',price:24.99,old:39.99,badge:'new',desc:'Expandable mesh travel organizers, pack smarter & save space.'}, 
+  {id:1,cat:'fashion',name:'Thinkplus ANC Wireless Earbuds',e:'🎧',img:'earbuds.jpg',price:24.99,old:49.99,badge:'hot',desc:'ANC noise cancellation, LED touch screen charging case, HD mic for clear calls.'},
+  {id:2,cat:'fashion',name:'1.83" Waterproof Smart Watch',e:'⌚',img:'smart-watch.jpg',price:29.99,old:54.99,badge:'sale',desc:'Call & message alerts, sleep monitoring, sports pedometer.',colors:['Black','Pink','Gold','Silver']},
+  {id:3,cat:'fashion',name:'Photochromic Polarized Sports Sunglasses',e:'🕶️',img:'sunglasses.jpg',price:14.99,old:34.99,badge:'new',desc:'UV400 polarized, light-adapting lenses, sports frame.',colors:['Black-Photochromic','Clear Black-Photochromic']},
+  {id:4,cat:'fashion',name:"Men's Anti-Theft Chest Bag",e:'👜',img:'chest-bag.jpg',price:24.99,old:49.99,badge:null,desc:'Password lock, USB port, waterproof crossbody sling.',colors:['Black with Brown','Black','Gray with Brown','Blue with Brown']},
+  {id:5,cat:'home',name:'Digital Air Fryer 6L',e:'🍳',img:'air-fryer.jpg',price:84.99,old:159.99,badge:'hot',desc:'6L multi-function digital air fryer, rapid heating, easy-clean basket.'},
+  {id:6,cat:'home',name:'Smart RGBW LED Bulb',e:'💡',img:'led-bulb.jpg',price:19.99,old:39.99,badge:'sale',desc:'16 colors + 4 dynamic lighting effects, infrared remote control, fits E27/E14/B22/GU10.'},
+  {id:7,cat:'home',name:'Programmable Drip Coffee Maker',e:'☕',img:'coffee-maker.jpg',price:79.99,old:149.99,badge:null,desc:'12-cup touch screen coffee maker, iced coffee function, regular & strong brew settings. US plug (adapter may be needed).'},
+  {id:8,cat:'home',name:'Bamboo Cutting Board Set',e:'🔪',img:'cutting-board.jpg',price:49.99,old:89.99,badge:'new',desc:'3-piece set (S/M/L), thickened natural bamboo, durable kitchen chopping boards.'},
+  {id:9,cat:'fitness',name:'Heavy Duty Resistance Band',e:'🏋',img:'resistance-bands.jpg',price:17.99,old:34.99,badge:'hot',desc:'Thickened elastic band, multiple resistance levels, ideal for strength & fitness training.'},
+  {id:10,cat:'fitness',name:'Anti-Slip EVA Yoga Mat',e:'🧘',img:'yoga-mat.jpg',price:22.99,old:49.99,badge:null,desc:'4mm EVA foam, anti-slip surface, lightweight & portable.'},
+  {id:11,cat:'fitness',name:'Speed Jump Rope',e:'🪢',img:'jump-rope.jpg',price:12.99,old:24.99,badge:'sale',desc:'Ball bearings, adjustable cable length, foam grip handles.'},
+  {id:12,cat:'fitness',name:'Deep Tissue Foam Roller',e:'🧴',img:'foam-roller.jpg',price:21.99,old:39.99,badge:'new',desc:'33cm textured EPP foam, ideal for muscle recovery & trigger point release.'},
+  {id:13,cat:'pets',name:'4L HD Camera Auto Pet Feeder (Dual Bowl)',e:'🐾',img:'pet-feeder.jpg',price:99.99,old:196.99,badge:'hot',desc:'HD camera, app remote feeding, dual bowl for 2 pets.',colors:['Black','White']},
+  {id:14,cat:'pets',name:'LED Light-Up Dog Collar (USB Rechargeable)',e:'🐶',img:'led-collar.jpg',price:13.99,old:27.99,badge:null,desc:'Adjustable, trimmable LED strip, USB rechargeable. Medium size.',colors:['Red','Green','Blue','Pink']},
+  {id:15,cat:'pets',name:'Electric Pet Clipper Grooming Kit (Full Set)',e:'✂️',img:'grooming-kit.jpg',price:44.99,old:79.99,badge:'sale',desc:'Clipper, trimmer, nail clippers, scissors, comb & brushes. For dogs — also works great for cats!'},
+  {id:16,cat:'pets',name:'Foldable Cat Tunnel Tube Toy',e:'🐱',img:'cat-tunnel.jpg',price:17.99,old:34.99,badge:'new',desc:'Interactive play tunnel, crinkle sound, washable, foldable for storage.'},
+  {id:17,cat:'electronics',name:'T&G TG117 Portable Bluetooth Speaker',e:'🔊',img:'bt-speaker.jpg',price:34.99,old:69.99,badge:'hot',desc:'1200mAh, 6-8hr playback, TF/USB/AUX, TWS pairing, waterproof.',colors:['Black','Red','Blue','Sky Blue','Camouflage','Blue/Yellow','Pattern']},
+  {id:18,cat:'electronics',name:'8-in-1 USB-C Hub',e:'🔌',img:'usb-hub.png',price:24.99,old:49.99,badge:null,desc:'4K@30Hz HDMI, PD 87W fast charge, USB 3.0+2.0, RJ45, SD/TF reader.'},
+  {id:19,cat:'electronics',name:'Adjustable Aluminum Laptop Stand',e:'💻',img:'laptop-stand.jpg',price:22.99,old:44.99,badge:'sale',desc:'6-level height, foldable, fits 8-16" laptops, ventilated.',colors:['Black','White']},
+  {id:20,cat:'electronics',name:'LED Selfie Ring Light Phone Clip',e:'💡',img:'ring-light.jpg',price:12.99,old:29.99,badge:'new',desc:'3-stop dimming, portable clip-on, fits most phones.',colors:['Pink','White','Blue','Black']},
+ {id:21,cat:'fashion',name:'Compression Packing Cube Set (5pcs)',e:'🧳',img:'packing-cubes.jpg',price:44.99,old:74.99,badge:'new',desc:'5-piece set (3L-15L), expandable mesh travel organizers, pack smarter & save space.',colors:['Black','Grey']},
+ {id:22,cat:'electronics',name:'Thinkplus Smart Touch Screen ANC Earbuds',e:'🎧',img:'earbuds-touchscreen.jpg',price:24.99,old:49.99,badge:'new',desc:'Full-color smart touch screen on charging case — ANC, battery %, clock. Color: black or white (random/seller\'s choice).'},
 ];
 
 let cart=JSON.parse(localStorage.getItem('nx_cart')||'[]');
 let apiKey=localStorage.getItem('nx_key')||'';
 let aiOpen=false;
+let selectedColor={};
 
 window.onload=()=>{render('all');countdown();particles();updateCart();if(apiKey)document.getElementById('apisetup').style.display='none';};
 
@@ -379,12 +385,18 @@ function render(cat,gridId='pg',list=null){
         <div class="pcat">${p.cat}</div>
         <div class="pname">${p.name}</div>
         <div class="pdesc" id="d${p.id}">${p.desc}</div>
+        ${p.colors?`<div class="cswatch" id="cs${p.id}">${p.colors.map((c,i)=>`<button class="ctag${i===0?' on':''}" data-c="${c}" onclick="pickColor(${p.id},'${c}',this)">${c}</button>`).join('')}</div>`:''}
         <div class="pfoot">
           <div><span class="pprice">$${p.price.toFixed(2)}</span> <span class="pold">$${p.old.toFixed(2)}</span></div>
           <button class="addbtn" onclick="addCart(${p.id})">Add +</button>
         </div>
       </div>
     </div>`).join('');
+}
+function pickColor(id,color,el){
+  selectedColor[id]=color;
+  el.parentElement.querySelectorAll('.ctag').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
 }
 
 function setTab(cat,el){
@@ -443,12 +455,13 @@ async function aiDescribe(id,e){
 // CART
 function addCart(id){
   const p=P.find(x=>x.id===id);
-  const ex=cart.find(x=>x.id===id);
-  if(ex)ex.qty++;else cart.push({...p,qty:1});
-  saveCart();updateCart();showToast('✅ '+p.name+' added!');
+  const color=selectedColor[id]||(p.colors?p.colors[0]:null);
+  const ex=cart.find(x=>x.id===id&&x.color===color);
+  if(ex)ex.qty++;else cart.push({...p,qty:1,color});
+  saveCart();updateCart();showToast('✅ '+p.name+(color?' ('+color+')':'')+' added!');
 }
-function removeCart(id){cart=cart.filter(x=>x.id!==id);saveCart();updateCart();}
-function qChange(id,d){const i=cart.find(x=>x.id===id);if(i){i.qty+=d;if(i.qty<=0)removeCart(id);}saveCart();updateCart();}
+function removeCart(id,color){cart=cart.filter(x=>!(x.id===id&&x.color===color));saveCart();updateCart();}
+function qChange(id,color,d){const i=cart.find(x=>x.id===id&&x.color===color);if(i){i.qty+=d;if(i.qty<=0)removeCart(id,color);}saveCart();updateCart();}
 function saveCart(){localStorage.setItem('nx_cart',JSON.stringify(cart));}
 function updateCart(){
   const count=cart.reduce((a,x)=>a+x.qty,0);
@@ -456,7 +469,7 @@ function updateCart(){
   const ci=document.getElementById('ci'),cf=document.getElementById('cf');
   if(!cart.length){ci.innerHTML='<div class="cempty"><span class="big">🛒</span><p>Cart is empty</p></div>';cf.style.display='none';return;}
   cf.style.display='block';
-  ci.innerHTML=cart.map(p=>`<div class="ci"><div class="ci-emoji">${p.e}</div><div class="ci-info"><div class="ci-name">${p.name}</div><div class="ci-price">$${(p.price*p.qty).toFixed(2)}</div><div class="ci-qty"><button class="qbtn" onclick="qChange(${p.id},-1)">−</button><span class="qnum">${p.qty}</span><button class="qbtn" onclick="qChange(${p.id},1)">+</button></div></div><button class="rmbtn" onclick="removeCart(${p.id})">🗑</button></div>`).join('');
+  ci.innerHTML=cart.map(p=>`<div class="ci"><div class="ci-emoji">${p.e}</div><div class="ci-info"><div class="ci-name">${p.name}${p.color?` <span style="color:var(--muted);font-weight:500">— ${p.color}</span>`:''}</div><div class="ci-price">$${(p.price*p.qty).toFixed(2)}</div><div class="ci-qty"><button class="qbtn" onclick="qChange(${p.id},'${p.color||''}',-1)">−</button><span class="qnum">${p.qty}</span><button class="qbtn" onclick="qChange(${p.id},'${p.color||''}',1)">+</button></div></div><button class="rmbtn" onclick="removeCart(${p.id},'${p.color||''}')">🗑</button></div>`).join('');
   document.getElementById('ctot').textContent='$'+cart.reduce((a,x)=>a+(x.price*x.qty),0).toFixed(2);
 }
 function toggleCart(){document.getElementById('ct').classList.toggle('on');document.getElementById('ov').classList.toggle('on');}
